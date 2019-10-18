@@ -10,11 +10,17 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function () {
-    return view('app');
+Route::get('/test', function () {
+    return App\Category::all()->toJson();
 });
-Route::resource('/data','Api\CategoryController');
-Route::view('/{path?}', 'app');
-Route::view('/{path?}/{pathone?}/', 'app');
+Auth::routes();
+Route::get('/{path}', function () {
+    return view('app');
+})->where('path','.*');
+//Route::resource('/data','Api\CategoryController');
 
+
+
+
+
+Route::get('/home', 'HomeController@index')->name('home');

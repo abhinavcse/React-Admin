@@ -15,7 +15,7 @@ class CategoryController extends Controller
     public function index()
     {
         //
-        return Category::all();
+        return Category::orderBy('id','desc')->paginate(2);
     }
 
     /**
@@ -37,6 +37,10 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         //
+        Category::create([
+            'name' => $request['category_name'],
+        ]);
+        return response()->json(['success'=>'success']);
     }
 
     /**
@@ -58,6 +62,8 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
+        $category=Category::find($id);
+        return $category;
         //
     }
 
@@ -71,6 +77,10 @@ class CategoryController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $catid=Category::find($id);
+        $catid->name=$request['category_name'];
+        $catid->save();
+        return response()->json(['success'=>'Data has been updated successfully']);
     }
 
     /**
@@ -82,5 +92,8 @@ class CategoryController extends Controller
     public function destroy($id)
     {
         //
+        $catid=Category::find($id);
+        $catid->delete();
+        return response()->json(['success'=>'Data has been deleted successfully']);
     }
 }

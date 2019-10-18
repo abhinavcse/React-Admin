@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import {BrowserRouter as Router, Link, Route} from "react-router-dom";
+import {BrowserRouter as Router, Link, Route, Switch} from "react-router-dom";
 import Home from './Home';
+import Login from './Login';
 import About from './About';
 import Category from './category/Index';
 export default class Header extends Component {
@@ -23,9 +24,6 @@ export default class Header extends Component {
                             <li className="nav-item">
                                 <Link className="nav-link" to="/about">About Us</Link>
                             </li>
-                            <li className="nav-item">
-                                <Link className="nav-link" to="/category">Category</Link>
-                            </li>
                         </ul>
                         <form className="form-inline my-2 my-lg-0">
                             <input className="form-control mr-sm-2" type="search" placeholder="Search"
@@ -34,11 +32,9 @@ export default class Header extends Component {
                         </form>
                     </div>
                 </nav>
-
-             <Route exact path='/' component={Home}/>
+             <Route exact path='/' component={Login}/>
              <Route exact path='/about' component={About} />
              <Route exact path='/category' component={Category} />
-
             </Router>
         );
     }
